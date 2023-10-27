@@ -46,7 +46,7 @@ function init() {
     scene.add(polarGridHelper);
 
     const loader = new GLTFLoader();
-    loader.load('../gltf/new/LeePerrySmith.glb', function (gltf) {
+    loader.load('../truck/53_reefer_trailer.glb', function (gltf) {
 
         const mesh = gltf.scene.children[0];
 
