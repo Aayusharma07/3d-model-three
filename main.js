@@ -11,7 +11,7 @@ import { createBox } from './box';
 
     // Create a red box
     const redBoxGeometry = new THREE.BoxGeometry(2, 1, 1);
-    const redBoxMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 }); // Red color
+    const redBoxMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, opacity: 0.3, transparent: true   }); // Red color
     const redBox = new THREE.Mesh(redBoxGeometry, redBoxMaterial);
     scene.add(redBox);
 
@@ -36,7 +36,7 @@ import { createBox } from './box';
      scene.add(edges);
 
      const redEdgesGeometry = new THREE.EdgesGeometry(redBoxGeometry);
-     const redEdgesMaterial = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 3 });
+     const redEdgesMaterial = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 3});
      const redEdges = new THREE.LineSegments(redEdgesGeometry, redEdgesMaterial);
      redEdges.position.copy(redBox.position);
      scene.add(redEdges);
@@ -46,6 +46,18 @@ import { createBox } from './box';
      const greenEdges = new THREE.LineSegments(greenEdgesGeometry, greenEdgesMaterial);
      greenEdges.position.copy(greenBox.position);
      scene.add(greenEdges);
+
+     const circleGeometry = new THREE.CylinderGeometry(0.1, 0.1, 0.2, 32);
+     const circleMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+
+     // Combine geometry and material into a mesh
+     const circle = new THREE.Mesh(circleGeometry, circleMaterial);
+
+     // Position the circle inside the box
+     circle.position.set(0, 0, 0);
+
+     // Add the circle to the box (not the scene)
+     redBox.add(circle);
      
 
     // Set up camera position
