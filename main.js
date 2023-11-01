@@ -12,20 +12,20 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
     // Create a red box
     const redBoxGeometry = new THREE.BoxGeometry(2, 1, 1);
-    const redBoxMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, opacity: 0.3, transparent: true   }); // Red color
+    const redBoxMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, opacity:1, transparent:true }); // Red color
     const redBox = new THREE.Mesh(redBoxGeometry, redBoxMaterial);
     scene.add(redBox);
 
     // Create a green box next to the red box
     const greenBoxGeometry = new THREE.BoxGeometry();
-    const greenBoxMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // Green color
+    const greenBoxMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00,opacity:1, transparent:true }); // Green color
     const greenBox = new THREE.Mesh(greenBoxGeometry, greenBoxMaterial);
     greenBox.position.x = 1.5; // Adjust the position to be next to the red box
     scene.add(greenBox);
 
      // Create a green box next to the red box
      const blueBoxGeometry = new THREE.BoxGeometry();
-     const blueBoxMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff }); // Blue color
+     const blueBoxMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff,opacity:1, transparent:true }); // Blue color
      const blueBox = new THREE.Mesh(blueBoxGeometry, blueBoxMaterial);
      blueBox.position.x = -1.5; // Adjust the position to be next to the red box
      scene.add(blueBox);
@@ -128,12 +128,19 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
       blueBox.material.wireframe = false;
       greenBox.material.wireframe = false;
 
-      redBox.material.opacity = 0.3;
-      blueBox.material.opacity = 0.3;
-      greenBox.material.opacity = 0.3;
+      redBox.material.opacity = 0.4;
+      blueBox.material.opacity = 0.4;
+      greenBox.material.opacity = 0.4;
+    });
 
-      redBox.material.transparent = true;
-      blueBox.material.transparent = true;
-      greenBox.material.transparent = true;
+    $("#uv-view-btn").click(function () {
+      // Code to be executed when the element is clicked
+      redBox.material.wireframe = false;
+      blueBox.material.wireframe = false;
+      greenBox.material.wireframe = false;
+
+      redBox.material.opacity = 1;
+      blueBox.material.opacity = 1;
+      greenBox.material.opacity = 1;
     });
   });
