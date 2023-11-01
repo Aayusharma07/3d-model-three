@@ -1,13 +1,14 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { createBox } from './box';
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    const camera = new THREE.PerspectiveCamera(50, 1000/512, .1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(1000, 512);
+    renderer.setPixelRatio(1000 / 512);
     renderer.setClearColor(0xeeeeee);
-    document.getElementById("3dmodel").appendChild(renderer.domElement);
+    camera.updateProjectionMatrix();
+    document.getElementById("viewer").appendChild(renderer.domElement);
 
     // Create a red box
     const redBoxGeometry = new THREE.BoxGeometry(2, 1, 1);

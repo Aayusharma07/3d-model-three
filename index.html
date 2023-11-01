@@ -3,10 +3,13 @@
 	<head lang="en">
 		<meta charset="utf-8">
 		<title>My first three.js app</title>
+		<script src="https://cdn.tailwindcss.com"></script>
 		<style>
-			body { margin: 0; }
-		</style>
-		<style>
+			body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+			display: flex;
+        }
 			table {
 				width: 100%;
 				border-collapse: collapse;
@@ -25,13 +28,78 @@
 			.hidden{
 				display: none;
 			}
+			header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            z-index: 1000;
+        }
+		#left-panel {
+            width: 200px;
+            background-color: #333;
+            color: white;
+			position: absolute;
+			overflow: auto;
+            z-index: 1000;
+			top:60px;
+			bottom: 60px;
+			left: 0;
+        }
+		#control-panel {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+           	padding: 10px;
+            box-sizing: border-box;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+		#viewer-container {
+            flex: 1;
+            position: relative;
+            top: 60px; /* Adjust for header height */
+        }
+
+        #viewer {
+            width: 100%;
+            height: 100vh; /* Adjust height as needed */
+            background-color: #f0f0f0;
+            position: relative;
+        }
 		</style>
+		<script type="module" src="/main.js"></script>
 	</head>
 	<body>
-		<script type="module" src="/main.js"></script>
-		<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-  		<label for="vehicle1">Show wireframe</label><br>
-		<div id="3dmodel"></div>
+		
+		<header>
+			<h1>Sketchfab-like 3D Viewer</h1>
+		</header>
+		<div id="left-panel">
+			<h2>Left Panel</h2>
+			<!-- Add your controls, information, or other elements here -->
+			<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+  			<label for="vehicle1">Show wireframe</label><br>
+		</div>		
+		<div id="control-panel">
+			<h2>Control Panel</h2>
+			<label for="rotateX">Rotate X:</label>
+			<input type="range" id="rotateX" min="-180" max="180" value="0"><br>
+	
+			<label for="rotateY">Rotate Y:</label>
+			<input type="range" id="rotateY" min="-180" max="180" value="0"><br>
+	
+			<label for="rotateZ">Rotate Z:</label>
+			<input type="range" id="rotateZ" min="-180" max="180" value="0"><br>
+		</div>
+		  <div id="viewer-container">
+			<div id="viewer"></div>
+		</div>
 		<div id="info" style="position:absolute; top: 0; right: 0;">
 			<table id="infoTable" class="hidden">
 				<thead>
@@ -64,7 +132,9 @@
 				</tbody>
 			</table>
 		</div>
-
+		<footer>
+			<p>Sketchfab-like Footer</p>
+		</footer>
 		</body>
 		</html>
 		This HTML code creates a table with two columns and five rows. Adjust the data and styles as needed for your specific requirements.
