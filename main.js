@@ -84,14 +84,6 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
     animate();
 
-    document.querySelector('#vehicle1')
-        .addEventListener('change', function()
-    {
-      redBox.material.wireframe = !redBox.material.wireframe;
-      blueBox.material.wireframe = !blueBox.material.wireframe;
-      greenBox.material.wireframe = !greenBox.material.wireframe;
-    }, false);
-
     var mouse, raycaster;
 
     raycaster = new THREE.Raycaster();
@@ -120,3 +112,28 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
   }
 
   document.addEventListener('click', onClick, false);
+
+  $(document).ready(function () {
+    // Attach a click event handler to an element with the id "myButton"
+    $("#wireframe-view-btn").click(function () {
+      // Code to be executed when the element is clicked
+      redBox.material.wireframe = true;
+      blueBox.material.wireframe = true;
+      greenBox.material.wireframe = true;
+    });
+
+    $("#transparent-view-btn").click(function () {
+      // Code to be executed when the element is clicked
+      redBox.material.wireframe = false;
+      blueBox.material.wireframe = false;
+      greenBox.material.wireframe = false;
+
+      redBox.material.opacity = 0.3;
+      blueBox.material.opacity = 0.3;
+      greenBox.material.opacity = 0.3;
+
+      redBox.material.transparent = true;
+      blueBox.material.transparent = true;
+      greenBox.material.transparent = true;
+    });
+  });
