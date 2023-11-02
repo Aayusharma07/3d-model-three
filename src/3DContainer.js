@@ -60,7 +60,7 @@ scene.add(spotLight1);
 scene.add(spotLight2);
 scene.add(spotLight3);
 
-const loader = new GLTFLoader().setPath('public/refrigerated_trailer_custom_model/');
+const loader = new GLTFLoader().setPath('refrigerated_trailer_custom_model/');
 loader.load('scene.gltf', (gltf) => {
   const mesh = gltf.scene;
 
