@@ -84,6 +84,13 @@ circle.position.set(0, 0, 0);
 // Add the circle to the box (not the scene)
 redBox.add(circle);
 
+const alertTexture = new THREE.TextureLoader().load('alert.png');
+const alertMaterial = new THREE.SpriteMaterial({ map: alertTexture });
+const alertIcon = new THREE.Sprite(alertMaterial);
+alertIcon.scale.set(0.4, 0.4, 0.4); // Adjust the scale as needed
+alertIcon.position.set(-1.5, 0, .6); // Position the icon relative to the box
+scene.add(alertIcon);
+
 // Set up camera position
 camera.position.z = 5;
 
@@ -173,4 +180,29 @@ $(document).ready(function () {
       behavior: "smooth",
     });
   });
+
+  var jsonData = [
+    { "Name": "John", "Age": 30, "City": "New York" }
+  ];
+
+  // Function to convert JSON to HTML table
+  function jsonToTable(jsonData) {
+      var table = '<table class="min-w-full bg-white border border-gray-300 shadow-md"><tbody>';
+      // Create table rows
+      $.each(jsonData, function (index, row) {  
+          $.each(row, function (key, value) {
+            table += '<tr>';
+            table += '<td class="py-2 px-4 border-b font-bold">' + key + '</td>';
+              table += '<td class="py-2 px-4 border-b">' + value + '</td>';
+              table += '</tr>';
+          });
+          
+      });
+      table += '</tbody></table>';
+      return table;
+  }
+
+  // Display the table
+  $('#info-popup').html(jsonToTable(jsonData));
+
 });

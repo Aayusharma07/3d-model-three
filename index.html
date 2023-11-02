@@ -43,7 +43,7 @@
           </a>
         </nav>
       </div>
-      <div class="mx-auto py-6 sm:px-6 lg:px-8 mt-16 pl-60">
+      <div class="ml-64 w-auto py-6 sm:px-6 lg:px-8 mt-16">
         <!-- 3D Model Card (Right) -->
         <div class="flex-1 my-4 " id="3dModel">
           <div class="border border-gray-300 rounded-lg shadow-md">
@@ -85,7 +85,16 @@
           <div id="map" class="bg-white border border-gray-300 shadow-md" style="height: 300px"></div>
         </div>
       </div>
+      <div class="group">
+        <!-- Popup Container -->
+        <div class="absolute top-16 right-0 bg-white text-gray-800 p-4 shadow-md">
+          <!-- Popup Content -->
+          <p>This is the information you want to display.</p>
+          <div id="info-popup"></div>
+        </div>
+      </div>
     </main>
+
     <!-- Add Google Maps API Script -->
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8iJ_8y1aanTBj38YD7dekNMzHcR9M9h8&callback=initMap"></script>
