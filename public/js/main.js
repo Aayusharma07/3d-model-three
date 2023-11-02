@@ -14,7 +14,7 @@ document.getElementById("viewer").appendChild(renderer.domElement);
 // Create camera
 const camera = new THREE.PerspectiveCamera(50, 800 / 512, 1, 1000);
 camera.updateProjectionMatrix();
-camera.position.set(3, 2, 8);
+camera.position.set(3, 1.7, 8);
 
 // Create OrbitControls
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -128,7 +128,7 @@ loader.load('scene.gltf', (gltf) => {
       child.receiveShadow = true;
     }
   });
-  container3DModelMesh.position.set(0, -1.72, -4);
+  container3DModelMesh.position.set(1, -1, -4);
   scene.add(container3DModelMesh);
 });
 
