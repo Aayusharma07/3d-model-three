@@ -1,55 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
     <title>Table with Action Buttons</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="js/script.js"></script>
   </head>
-
   <body class="font-sans bg-gray-100 p-8">
-
-    <div class="max-w-screen-lg mx-auto">
-
-      <h1 class="text-2xl font-bold mb-4">Users</h1>
-
+    <div class="w-full mx-auto">
       <table class="w-full bg-white border border-gray-300 shadow-md">
+        <caption class="text-2xl font-bold mb-4 text-left">
+          Asset Table
+        </caption>
         <thead class="bg-gray-700 text-white text-left">
           <tr>
             <th class="py-2 px-4 border-b">Asset ID</th>
             <th class="py-2 px-4 border-b">Asset Name</th>
             <th class="py-2 px-4 border-b">TRU Status</th>
             <th class="py-2 px-4 border-b">Control Mode</th>
-            <th class="py-2 px-4 border-b">Alerts</th>
-            <th class="py-2 px-4 border-b">Goods</th>
-            <th class="py-2 px-4 border-b">Goods Health</th>
+            <th class="py-2 px-4 border-b">Compartment Details</th>
             <th class="py-2 px-4 border-b">Actions</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td class="py-2 px-4 border-b">1</td>
-            <td class="py-2 px-4 border-b">John Doe</td>
-            <td class="py-2 px-4 border-b">john@example.com</td>
-            <td class="py-2 px-4 border-b">john@example.com</td>
-            <td class="py-2 px-4 border-b">john@example.com</td>
-            <td class="py-2 px-4 border-b">john@example.com</td>
-            <td class="py-2 px-4 border-b">john@example.com</td>
-            <td class="py-2 px-4 border-b">
-              <a href="/3dmodel.html#uv"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View 3D
-                Model</a>
-              <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
-            </td>
-          </tr>
-          <!-- Add more rows as needed with your data -->
-
-        </tbody>
+        <tbody id="asset-table"></tbody>
       </table>
-
     </div>
-
   </body>
-
 </html>
