@@ -10,6 +10,7 @@ const filePath = './resources/mockdata.json';
 // Middleware to parse JSON requests
 app.use(express.json());
 app.use(cors());
+app.use(express.static('public'))
 
 // Endpoint to get the current JSON content
 app.get('/api/data', async (req, res) => {

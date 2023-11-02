@@ -1,6 +1,6 @@
-import * as THREE from "three";
-import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 // Create rendered
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -12,9 +12,9 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.getElementById("viewer").appendChild(renderer.domElement);
 
 // Create camera
-const camera = new THREE.PerspectiveCamera(45, 800 / 512, 1, 1000);
+const camera = new THREE.PerspectiveCamera(50, 800 / 512, 1, 1000);
 camera.updateProjectionMatrix();
-camera.position.set(4, 5, 8);
+camera.position.set(3, 2, 8);
 
 // Create OrbitControls
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -29,24 +29,32 @@ const scene = new THREE.Scene();
 const compartments=[
   {
     color:"red",//red
-    size:4,
-    position:-2
+    size:5,
+    position:{
+      x:0,
+      y:0,
+      z:-1
+    }
   },
   {
-    color:"green",//green
+    color:"blue",//green
     size:3,
-    position:1.5
+    position:{
+      x:0,
+      y:0,
+      z:3
+    }
   }
 ];
 for (const obj of compartments) {
-    const boxGeometry = new THREE.BoxGeometry(obj.size, 2.2, 1.5);
+    const boxGeometry = new THREE.BoxGeometry(1.5, 2.2, obj.size);
     const boxMaterial = new THREE.MeshStandardMaterial({
       color: obj.color,
       opacity: 1,
       transparent: true,
     });
     const box = new THREE.Mesh(boxGeometry, boxMaterial);
-    box.position.x = obj.position;
+    box.position.set(obj.position.x, obj.position.y, obj.position.z);
     box.visible = false;
     scene.add(box);
     obj.box = box;
@@ -68,31 +76,31 @@ for (const obj of compartments) {
 const circleGeometry = new THREE.CylinderGeometry(0.1, 0.1, 0.2, 32);
 const circleMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
 const circle = new THREE.Mesh(circleGeometry, circleMaterial);
-circle.position.set(2, 0, 0);
+circle.position.set(compartments[1].position.x, compartments[1].position.y, compartments[1].position.z);
 compartments[0].box.add(circle);
 
 // Create icecreame comparment box
-const icecreamTexture = new THREE.TextureLoader().load('icecream.png');
+const icecreamTexture = new THREE.TextureLoader().load('/img/icecream.png');
 const icecreameMaterial = new THREE.SpriteMaterial({ map: icecreamTexture });
 const icecreameIcon = new THREE.Sprite(icecreameMaterial);
 icecreameIcon.scale.set(0.5, 0.5, 0.5);
-icecreameIcon.position.set(compartments[0].position, 0, 1);
+icecreameIcon.position.set(compartments[1].position.x, 0, 1);
 icecreameIcon.position.set(0, 0, 0);
 compartments[0].box.add(icecreameIcon);
 scene.add(icecreameIcon);
 
 // Create alert over comparment box
-const alertTexture = new THREE.TextureLoader().load('alert.png');
+const alertTexture = new THREE.TextureLoader().load('/img/alert.png');
 const alertMaterial = new THREE.SpriteMaterial({ map: alertTexture });
 const alertIcon = new THREE.Sprite(alertMaterial);
 alertIcon.scale.set(0.5, 0.5, 0.5);
-alertIcon.position.set(compartments[0].position, 0, 1);
+alertIcon.position.set(compartments[0].position.x, 1.3, 0);
 scene.add(alertIcon);
 
 // Create Spot Lights
-const spotLight1 = new THREE.SpotLight(0xffffff,  5, 100, .5, 0);
-const spotLight2 = new THREE.SpotLight(0xffffff,  5, 100, .5, 0);
-const spotLight3 = new THREE.SpotLight(0xffffff,  50, 100, 1, 1);
+const spotLight1 = new THREE.SpotLight(0xeeeeee,  5, 100, .5, 0);
+const spotLight2 = new THREE.SpotLight(0xeeeeee,  5, 100, .5, 0);
+const spotLight3 = new THREE.SpotLight(0xeeeeee,  50, 100, 1, 1);
 
 spotLight1.position.set(25, 10, 15);
 spotLight2.position.set(-25, 5, 15);
@@ -111,7 +119,7 @@ scene.add(spotLight3);
 
 // Load original view
 let container3DModelMesh;
-const loader = new GLTFLoader().setPath('http://localhost:5173/container/');
+const loader = new GLTFLoader().setPath('/3dmodel/container/');
 loader.load('scene.gltf', (gltf) => {
   container3DModelMesh = gltf.scene;
   container3DModelMesh.traverse((child) => {
