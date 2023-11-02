@@ -2,9 +2,6 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-
-
-
 // Create rendered
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(800, 512);
@@ -50,6 +47,7 @@ for (const obj of compartments) {
     });
     const box = new THREE.Mesh(boxGeometry, boxMaterial);
     box.position.x = obj.position;
+    box.visible = false;
     scene.add(box);
     obj.box = box;
     // const edgesGeometry = new THREE.EdgesGeometry(box);
@@ -112,17 +110,18 @@ scene.add(spotLight2);
 scene.add(spotLight3);
 
 // Load original view
+let container3DModelMesh;
 const loader = new GLTFLoader().setPath('http://localhost:5173/container/');
 loader.load('scene.gltf', (gltf) => {
-  const mesh = gltf.scene;
-  mesh.traverse((child) => {
+  container3DModelMesh = gltf.scene;
+  container3DModelMesh.traverse((child) => {
     if (child.isMesh) {
       child.castShadow = true;
       child.receiveShadow = true;
     }
   });
-  mesh.position.set(0, -1.72, -4);
-  scene.add(mesh); 
+  container3DModelMesh.position.set(0, -1.72, -4);
+  scene.add(container3DModelMesh);
 });
 
 // Set up animation
@@ -134,23 +133,41 @@ const animate = () => {
 animate();
 
 $(document).ready(function () {
+
+  $.getJSON('http://localhost:3000/api/data', function (data) {
+      console.log('Data:', data);
+  });
+
   $("#wireframe-view-btn").click(function () {
+    container3DModelMesh.visible = false;
     compartments.forEach(obj => {
+      obj.box.visible  = true;
       obj.box.material.wireframe = true;
     });
   });
 
   $("#transparent-view-btn").click(function () {
+    container3DModelMesh.visible = false;
     compartments.forEach(obj => {
+      obj.box.visible  = true;
       obj.box.material.wireframe = false;
-      obj.box.material.opacity = 0.4;
+      obj.box.material.opacity = 0.4;      
     });
   });
 
   $("#uv-view-btn").click(function () {
+    container3DModelMesh.visible = false;
     compartments.forEach(obj => {
+      obj.box.visible  = true;
       obj.box.material.wireframe = false;
       obj.box.material.opacity = 1;
+    });
+  });
+
+  $("#original-view-btn").click(function () {
+    container3DModelMesh.visible = true;
+    compartments.forEach(obj => {
+      obj.box.visible  = false;
     });
   });
 

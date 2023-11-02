@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+    <head lang="en">
+        <meta charset="utf-8" />
+        <title>Carrier | Fleet Viewer</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script type="module" src="/main.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+        <header class="bg-gray-800 text-white p-4 fixed w-full top-0 mb-4">
+            <h1 class="text-xl font-bold text-center">Digital Twin</h1>
+        </header>
+        <main class="flex bg-gray-100 min-h-full">
+            <div class="p-4 fixed top-0 left-0 h-full flex-shrink-0 w-60 bg-gray-800 text-white fixed">
+                <div class="flex items-center justify-center pb-6">
+                    <img class="h-12 text-center" src="logo.png" alt="Carrier" />
+                </div>
+                <h1 class="text-l font-bold mb-2 text-gray-400">Model Inspector</h1>
+                <nav>
+                    <button id="original-view-btn"
+                        class="viewer-btn w-full flex items-center px-4 py-2 hover:bg-gray-600 active:bg-gray-600">
+                        Original View
+                    </button>
+                    <button id="uv-view-btn" class="viewer-btn w-full flex items-center px-4 py-2 hover:bg-gray-600">
+                        UV Checker
+                    </button>
+                    <button id="transparent-view-btn"
+                        class="viewer-btn w-full flex items-center px-4 py-2 hover:bg-gray-600">
+                        Transparent View
+                    </button>
+                    <button id="wireframe-view-btn"
+                        class="viewer-btn w-full flex items-center px-4 py-2 hover:bg-gray-600">
+                        Wireframe
+                    </button>
+                    <h1 class="text-l font-bold mb-2 text-gray-400">Model Inspector</h1>
+                    <a href="#driverInfo" class="flex items-center px-4 py-2 hover:bg-gray-600 active:bg-gray-600">
+                        Driver Info
+                    </a>
+                    <a href="#uv" class="flex items-center px-4 py-2 hover:bg-gray-600">
+                        Map
+                    </a>
+                </nav>
+            </div>
+            <div class="ml-64 w-auto py-6 sm:px-6 lg:px-8 mt-16">
+                <!-- 3D Model Card (Right) -->
+                <div class="flex-1 my-4 " id="3dModel">
+                    <div class="border border-gray-300 rounded-lg shadow-md">
+                        <h2 class="text-2xl font-semibold py-3 px-6 bg-gray-800 text-white">
+                            3D Model
+                        </h2>
+                        <div id="viewer-container" class="flex">
+                            <div id="viewer"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Driver Card (Right) -->
+                <div class="flex-1 my-4" id="driverInfo">
+                    <div class="border border-gray-300 rounded-lg shadow-md">
+                        <h2 class="text-2xl font-semibold py-3 px-6 bg-gray-800 text-white">
+                            Driver Information
+                        </h2>
+                        <div class="flex">
+                            <div>
+                                <img src="https://placekitten.com/150/150" alt="Driver Image"
+                                    class="mb-4 rounded-full p-3" />
+                            </div>
+                            <div class="p-4 pt-8">
+                                <p><strong>Name:</strong> John Doe</p>
+                                <p><strong>License Number:</strong> ABC123456</p>
+                                <p><strong>Vehicle:</strong> XYZ123 (Car)</p>
+                                <p><strong>Contact:</strong> 9890XXXX586 (Mobile)</p>
+                            </div>
+                        </div>
+                        <!-- Add more information as needed -->
+                    </div>
+                </div>
+                <!-- Map Card (Right) -->
+                <div class="flex-1">
+                    <div class="border border-gray-300 rounded-lg shadow-md">
+                        <h2 class="text-2xl font-semibold py-3 px-6 bg-gray-800 text-white">
+                            Route Information
+                        </h2>
+                    </div>
+                    <div id="map" class="bg-white border border-gray-300 shadow-md" style="height: 300px"></div>
+                </div>
+            </div>
+            <div class="group">
+                <!-- Popup Container -->
+                <div class="absolute top-16 right-0 bg-white text-gray-800 p-4 shadow-md">
+                    <!-- Popup Content -->
+                    <p>This is the information you want to display.</p>
+                    <div id="info-popup"></div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Add Google Maps API Script -->
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8iJ_8y1aanTBj38YD7dekNMzHcR9M9h8&callback=initMap"></script>
+
+        <script>
+            function initMap() {
+                var routeCoordinates = [
+                    { lat: 37.77492956346617, lng: -122.41941511250251 }, // Starting point
+                    // Add more coordinates for the route
+                    // { lat: ..., lng: ... },
+                    // { lat: ..., lng: ... },
+                    // ...
+                    { lat: 37.77492956346617, lng: -122.41941511250251 }, // Ending point (back to starting point)
+                ];
+
+                var map = new google.maps.Map(document.getElementById("map"), {
+                    center: routeCoordinates[0],
+                    zoom: 13,
+                });
+
+                var routePath = new google.maps.Polyline({
+                    path: routeCoordinates,
+                    geodesic: true,
+                    strokeColor: "#FF0000",
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2,
+                });
+
+                routePath.setMap(map);
+            }
+        </script>
+    </body>
+
+</html>

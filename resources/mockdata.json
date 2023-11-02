@@ -1,0 +1,327 @@
+[
+    {
+      "AssetId": "WB1743501",
+      "AssetName": "Trailer1",
+      "AssetStatus": "Stationary",
+      "TRUSerialNumber": "HD304175",
+      "TRUStatus": "On",
+      "AlaramStatus": "Product temp is not correct",
+      "ControlMode":"",
+      "VehicleDetails":{
+        "VehicleSerialNo":"USXXX2345",
+        "CurrentSpeed":50,
+        "AverageSpeed":40
+      },
+      "DriverDetails":{
+        "Name":"Harminson Taylor",
+        "LicenceNumber":"LXXXX32546",
+        "ContactNumber":"98765XXXXX"
+      },
+      "Compartments":[
+        {
+          "Name":"C1",
+          "SetTemprature":8,
+          "ReturnTemprature":9,
+          "SetHumidity":30,
+          "ReturnHumidity":29,
+          "Logistics":[
+            {
+              "LogisticType":"ICE Creame",
+              "ExpectedTempratureRange":{
+                "LowerRange":-10,
+                "UpperRange":-5
+              },
+              "ExpectedHumadityRange":{
+                "LowerRange":10,
+                "UpperRange":20
+              }
+            }
+          ],
+          "Sencors":[
+            {
+              "SencorId":12345,
+              "Description":"Measures Logistic's Temprature in Compartment",
+              "SencorType":"Temprature",
+              "Unit":"Degree Celcius",
+              "Value":9
+            },
+            {
+              "SencorId":34556,
+              "Description":"Measures Logistic's Temprature in Compartment",
+              "SencorType":"Temprature",
+              "Unit":"Degree Celcius",
+              "Value":9
+            },
+            {
+              "SencorId":32432,
+              "Description":"Measures Logistic's Humadity in Compartment",
+              "SencorType":"Humidity",
+              "Unit":"g/m^3",
+              "Value":9
+            }
+          ]
+        },
+        {
+          "Name":"C2",
+          "SetTemprature":18,
+          "ReturnTemprature":9,
+          "SetHumidity":30,
+          "ReturnHumidity":29,
+          "Logistics":[
+            {
+              "LogisticType":"Apple",
+              "ExpectedTempratureRange":{
+                "LowerRange":10,
+                "UpperRange":15
+              },
+              "ExpectedHumadityRange":{
+                "LowerRange":20,
+                "UpperRange":30
+              }
+            }
+          ],
+          "Sencors":[
+            {
+              "SencorId":9211,
+              "Description":"Measures Logistic's Temprature in Compartment",
+              "SencorType":"Temprature",
+              "Unit":"Degree Celcius",
+              "Value":12
+            },
+            {
+              "SencorId":2321,
+              "Description":"Measures Logistic's Temprature in Compartment",
+              "SencorType":"Temprature",
+              "Unit":"Degree Celcius",
+              "Value":13
+            },
+            {
+              "SencorId":4432,
+              "Description":"Measures Logistic's Humadity in Compartment",
+              "SencorType":"Humidity",
+              "Unit":"g/m^3",
+              "Value":21
+            }
+          ]
+        }
+      ],
+      "Route":{
+        "Expected":{
+          "Source":{
+            "Latitude(Expected)": 26.16521776,
+            "Longitude(Expected)": 91.8206028
+          },
+          "Destination":{
+            "Latitude(Expected)": 13.12219202,
+            "Longitude(Expected)": 74.7698229
+          },
+          "OnRoutePoints":[
+              {
+                "Latitude(Expected)": 26.16521776,
+                "Longitude(Expected)": 91.8206028
+              },
+              {
+                "Latitude(Expected)": 16.64663163,
+                "Longitude(Expected)": 81.22978333
+   
+              },
+              {
+                "Latitude(Expected)": 14.10452511,
+                "Longitude(Expected)": 79.42802566
+  
+              },
+              {
+                "Latitude(Expected)": 10.8871653,
+                "Longitude(Expected)": 77.0110336
+  
+              },
+              {
+                "Latitude(Expected)": 13.12219202,
+                "Longitude(Expected)": 74.7698229
+  
+              }
+          ]
+        },
+        "Actual":{
+          "Source":{
+            "Latitude(Actual)": 26.16521776,
+            "Longitude(Actual)": 91.8206028
+          },
+          "Destination":{
+            "Latitude(Actual)": 13.12219202,
+            "Longitude(Actual)": 74.7698229
+          },
+          "CurrentLocation":{
+            "Latitude(Actual)": 26.16521776,
+            "Longitude(Actual)": 91.8206028
+          },
+          "Halts":[
+            {
+              "Latitude(Actual)": 26.16521776,
+              "Longitude(Actual)": 91.8206028
+            },
+            {
+              "Latitude(Actual)": 21.32353388,
+              "Longitude(Actual)": 81.63792464
+            },
+            {
+              "Latitude(Actual)": 19.60382078,
+              "Longitude(Actual)": 76.30739707
+            },
+            {
+              "Latitude(Actual)": 10.8871653,
+              "Longitude(Actual)": 77.01103366
+  
+            },
+            {
+              "Latitude(Actual)": 13.12219202,
+              "Longitude(Actual)": 74.7698229
+  
+            }
+          ]
+        }
+        
+      }
+    },
+    {
+      "AssetId": "WC32111",
+      "AssetName": "Trailer2",
+      "AssetStatus": "Moving",
+      "TRUSerialNumber": "AP3041234",
+      "TRUStatus": "On",
+      "AlaramStatus": "Product temp is not correct",
+      "ControlMode":"",
+      "VehicleDetails":{
+        "VehicleSerialNo":"USXXX2345",
+        "CurrentSpeed":50,
+        "AverageSpeed":40
+      },
+      "DriverDetails":{
+        "Name":"David Gautham",
+        "LicenceNumber":"LXXXX1234",
+        "ContactNumber":"82965XXXXX"
+      },
+      "Compartments":[
+        {
+          "Name":"C1",
+          "SetTemprature":18,
+          "ReturnTemprature":11,
+          "SetHumidity":30,
+          "ReturnHumidity":29,
+          "Logistics":[
+            {
+              "LogisticType":"Medicine",
+              "ExpectedTempratureRange":{
+                "LowerRange":-6,
+                "UpperRange":5
+              },
+              "ExpectedHumadityRange":{
+                "LowerRange":10,
+                "UpperRange":20
+              }
+            }
+          ],
+          "Sencors":[
+            {
+              "SencorId":33212,
+              "Description":"Measures Logistic's Temprature in Compartment",
+              "SencorType":"Temprature",
+              "Unit":"Degree Celcius",
+              "Value":4
+            },
+            {
+              "SencorId":34523,
+              "Description":"Measures Logistic's Temprature in Compartment",
+              "SencorType":"Temprature",
+              "Unit":"Degree Celcius",
+              "Value":2
+            },
+            {
+              "SencorId":312366,
+              "Description":"Measures Logistic's Humadity in Compartment",
+              "SencorType":"Humidity",
+              "Unit":"g/m^3",
+              "Value":12
+            }
+          ]
+        } 
+      ],
+      "Route":{
+        "Expected":{
+          "Source":{
+            "Latitude(Expected)": 37.780549173466156,
+            "Longitude(Expected)": -122.42652933775071
+          },
+          "Destination":{
+            "Latitude(Expected)": 37.13520595817424,
+            "Longitude(Expected)": -121.04225210343778
+          },
+          "OnRoutePoints":[
+              {
+                "Latitude(Expected)": 37.780549173466156,
+                "Longitude(Expected)": -122.42652933775071
+              },
+              {
+                "Latitude(Expected)": 37.70887817115642,
+                "Longitude(Expected)": -121.92390486576804
+   
+              },
+              {
+                "Latitude(Expected)": 37.737120487259254,
+                "Longitude(Expected)": -121.54762315723455
+  
+              },
+              {
+                "Latitude(Expected)": 37.55444176310836,
+                "Longitude(Expected)": -121.26197864856681
+  
+              },
+              {
+                "Latitude(Expected)": 37.13520595817424,
+                "Longitude(Expected)": -121.04225210343778
+  
+              }
+          ]
+        },
+        "Actual":{
+          "Source":{
+            "Latitude(Actual)": 37.780549173466156,
+            "Longitude(Actual)": -122.42652933775071
+          },
+          "Destination":{
+            "Latitude(Actual)": 37.13520595817424,
+            "Longitude(Actual)": -121.04225210343778
+          },
+          "CurrentLocation":{
+            "Latitude(Actual)": 37.780549173466156,
+            "Longitude(Actual)": -122.42652933775071
+          },
+          "Halts":[
+            {
+              "Latitude(Actual)": 37.780549173466156,
+              "Longitude(Actual)": -122.42652933775071
+            },
+            {
+              "Latitude(Actual)": 37.91718280915538,
+              "Longitude(Actual)": -121.92115828395391
+            },
+            {
+              "Latitude(Actual)": 37.95400881160807,
+              "Longitude(Actual)": -121.31416370303496
+            },
+            {
+              "Latitude(Actual)": 37.630612496100476,
+              "Longitude(Actual)": -120.98182730352728
+  
+            },
+            {
+              "Latitude(Actual)": 37.13520595817424,
+              "Longitude(Actual)": -121.04225210343778
+  
+            }
+          ]
+        }
+        
+      }
+    }
+  ]
