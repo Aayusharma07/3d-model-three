@@ -71,3 +71,28 @@ function jsonToTable(data) {
   });
   return row;
 }
+
+$(document).ready(function () {
+  // Make an API request to fetch the data
+  $.ajax({
+    url: "http://localhost:3000/api/data", // Replace with your API endpoint
+    method: "GET",
+    success: function (data) {
+      data.forEach((element) => {
+        const comparments = element.Compartments;
+        for (let i = 0; i < comparments.length; i++) {
+          $("#name").text(comparments[i].Name);
+          $("#goods").text(comparments[i].Logistic.LogisticType);
+          $("#goodsHealth").text(comparments[i].goodsHealth);
+          $("#setTemperature").find("input").val(comparments[i].SetTemprature);
+          $("#returnTemperature").text(comparments[i].ReturnTemprature);
+          $("#setHumidity").find("input").val(`${comparments[i].SetHumidity}&#176`);
+          $("#returnHumidity").text(comparments[i].ReturnHumidity);
+        }
+      });
+    },
+    error: function (error) {
+      console.log("API request failed: " + error);
+    },
+  });
+});
