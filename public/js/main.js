@@ -66,17 +66,27 @@ function show3DModel() {
     scene.add(ambientLight, directionalLight);
   }
 
-  // Create circle comparment box
-  const circleGeometry = new THREE.CylinderGeometry(0.1, 0.1, 0.2, 32);
-  const circleMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-  const circle = new THREE.Mesh(circleGeometry, circleMaterial);
-  circle.position.set(
-    compartments[1].position.x - 1,
-    compartments[1].position.y - 1,
-    compartments[1].position.z + 1
-  );
-  compartments[0].box.add(circle);
+  // // Create circle comparment box
+  // const circleGeometry = new THREE.CylinderGeometry(0.1, 0.1, 0.2, 32);
+  // const circleMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+  // const circle = new THREE.Mesh(circleGeometry, circleMaterial);
+  // circle.position.set(
+  //   compartments[1].position.x - 1,
+  //   compartments[1].position.y - 1,
+  //   compartments[1].position.z + 1
+  // );
+  // compartments[0].box.add(circle);
 
+    const appleTexture = new THREE.TextureLoader().load("/img/fruit.png");
+    const appleMaterial = new THREE.SpriteMaterial({ map: appleTexture });
+    const appleIcon = new THREE.Sprite(appleMaterial);
+    appleIcon.scale.set(0.5, 0.5, 0.5);
+    appleIcon.position.set(
+      compartments[1].position.x - 1,
+      compartments[1].position.y - 1,
+      compartments[1].position.z + 1
+    );
+    compartments[0].box.add(appleIcon);
   // Create icecreame comparment box
   const icecreamTexture = new THREE.TextureLoader().load("/img/icecream.png");
   const icecreameMaterial = new THREE.SpriteMaterial({ map: icecreamTexture });
