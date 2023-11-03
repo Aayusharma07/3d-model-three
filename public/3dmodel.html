@@ -17,6 +17,18 @@
         <script type="module" src="js/main.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+        <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+        <script type="module" src="js/map.js"></script>
+        <style>
+            .custom-marker {
+                background-color: rgb(255, 0, 0);
+                /* Change this to the color you want */
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+            }
+        </style>
     </head>
 
     <body>
@@ -94,7 +106,7 @@
                             Route Information
                         </h2>
                     </div>
-                    <div id="map" class="bg-white border border-gray-300 shadow-md" style="height: 300px"></div>
+                    <div id="map" class="bg-white border border-gray-300 shadow-md" style="height: 400px"></div>
                 </div>
             </div>
             <div class="group">
@@ -107,37 +119,6 @@
             </div>
         </main>
 
-        <!-- Add Google Maps API Script -->
-        <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8iJ_8y1aanTBj38YD7dekNMzHcR9M9h8&callback=initMap"></script>
-
-        <script>
-            function initMap() {
-                var routeCoordinates = [
-                    { lat: 37.77492956346617, lng: -122.41941511250251 }, // Starting point
-                    // Add more coordinates for the route
-                    // { lat: ..., lng: ... },
-                    // { lat: ..., lng: ... },
-                    // ...
-                    { lat: 37.77492956346617, lng: -122.41941511250251 }, // Ending point (back to starting point)
-                ];
-
-                var map = new google.maps.Map(document.getElementById("map"), {
-                    center: routeCoordinates[0],
-                    zoom: 13,
-                });
-
-                var routePath = new google.maps.Polyline({
-                    path: routeCoordinates,
-                    geodesic: true,
-                    strokeColor: "#FF0000",
-                    strokeOpacity: 1.0,
-                    strokeWeight: 2,
-                });
-
-                routePath.setMap(map);
-            }
-        </script>
     </body>
 
 </html>

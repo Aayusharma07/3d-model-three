@@ -102,6 +102,14 @@ function show3DModel() {
   );
   scene.add(alertIcon);
 
+  // Create carrier logo at tru
+  const logoTexture = new THREE.TextureLoader().load('/img/logo.png');
+  const logoMaterial = new THREE.SpriteMaterial({ map: logoTexture });
+  const carrierIcon = new THREE.Sprite(logoMaterial);
+  carrierIcon.scale.set(1, 0.5, 0);
+  carrierIcon.position.set(1, 1.7, -4.5);
+  scene.add(carrierIcon);
+
   // Create Spot Lights
   const spotLight1 = new THREE.SpotLight(0xeeeeee, 5, 100, 0.5, 0);
   const spotLight2 = new THREE.SpotLight(0xeeeeee, 5, 100, 0.5, 0);

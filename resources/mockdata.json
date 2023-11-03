@@ -7,7 +7,7 @@
     "TRUStatus": "On",
     "AlaramStatus": "Product temp is not correct",
     "ControlMode": "Continuous",
-    "RearDoor": "Open",
+    "RearDoor": "Close",
     "VehicleDetails": {
       "VehicleSerialNo": "USXXX2345",
       "CurrentSpeed": 50,
@@ -27,13 +27,11 @@
           "z": -1
         },
         "Name": "C1",
-        "SetTemprature": -25,
         "ReturnTemprature": -20,
-        "SetHumidity": 30,
-        "ReturnHumidity": 29,
+        "ReturnHumidity": 22,
         "Alert": {
           "HasAlert": true,
-          "AlertDescription": "IceCream is melting, decrease compartment C1 temprature to fix the issue."
+          "AlertDescription": "Melt"
         },
         "Logistic": {
           "LogisticType": "ICE Cream",
@@ -43,21 +41,24 @@
               "ExpectedTempratureRange": {
                 "LowerRange": "-18",
                 "UpperRange": "-25"
-              }
+              },
+              "RaiseAlert": false
             },
             {
               "State": "Soft",
               "ExpectedTempratureRange": {
                 "LowerRange": "-18",
                 "UpperRange": "0"
-              }
+              },
+              "RaiseAlert": false
             },
             {
               "State": "Melt",
               "ExpectedTempratureRange": {
                 "LowerRange": "0",
                 "UpperRange": "9999"
-              }
+              },
+              "RaiseAlert": true
             }
           ],
           "ExpectedHumadityRange": {
@@ -87,7 +88,11 @@
             "Unit": "g/m^3",
             "Value": 9
           }
-        ]
+        ],
+        "SetTemprature": "40",
+        "HasAlert": false,
+        "AlertDescription": "Normal",
+        "SetHumidity": "50"
       },
       {
         "size": 3,
@@ -97,13 +102,13 @@
           "z": 3
         },
         "Name": "C2",
-        "SetTemprature": -25,
+        "SetTemprature": "10",
         "ReturnTemprature": -10,
         "SetHumidity": 30,
         "ReturnHumidity": 29,
         "Alert": {
-          "HasAlert": false,
-          "AlertDescription": "Normal"
+          "HasAlert": true,
+          "AlertDescription": "Spoil"
         },
         "Logistic": {
           "LogisticType": "Apple",
@@ -113,21 +118,24 @@
               "ExpectedTempratureRange": {
                 "LowerRange": "-18",
                 "UpperRange": "-25"
-              }
+              },
+              "RaiseAlert": false
             },
             {
-              "State": "Soft",
+              "State": "Rotten",
               "ExpectedTempratureRange": {
                 "LowerRange": "-18",
                 "UpperRange": "0"
-              }
+              },
+              "RaiseAlert": true
             },
             {
-              "State": "Melt",
+              "State": "Spoil",
               "ExpectedTempratureRange": {
                 "LowerRange": "0",
                 "UpperRange": "9999"
-              }
+              },
+              "RaiseAlert": true
             }
           ],
           "ExpectedHumadityRange": {
@@ -253,13 +261,13 @@
     "Compartments": [
       {
         "Name": "C1",
-        "SetTemprature": -25,
-        "ReturnTemprature": -20,
-        "SetHumidity": 30,
-        "ReturnHumidity": 29,
+        "SetTemprature": 0,
+        "ReturnTemprature": -5,
+        "SetHumidity": 5,
+        "ReturnHumidity": 10,
         "Alert": {
           "HasAlert": false,
-          "AlertDescription": "IceCream is melting, decrease compartment C1 temprature to fix the issue."
+          "AlertDescription": "Normal"
         },
         "Logistic": {
           "LogisticType": "Medicine",
@@ -269,21 +277,16 @@
               "ExpectedTempratureRange": {
                 "LowerRange": "-18",
                 "UpperRange": "-25"
-              }
+              },
+              "RaiseAlert": false
             },
             {
-              "State": "Soft",
+              "State": "Spoil",
               "ExpectedTempratureRange": {
                 "LowerRange": "-18",
                 "UpperRange": "0"
-              }
-            },
-            {
-              "State": "Melt",
-              "ExpectedTempratureRange": {
-                "LowerRange": "0",
-                "UpperRange": "9999"
-              }
+              },
+              "RaiseAlert": true
             }
           ],
           "ExpectedHumadityRange": {

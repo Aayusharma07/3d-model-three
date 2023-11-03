@@ -4,6 +4,18 @@ $(document).ready(function () {
     $("#asset-table").html(jsonToTable(data));
 
     $(".viewDetailsBtn").click(function () {
+      var assetId = $(this).attr("id");
+
+      const currentAsset = data.find(asset => asset.AssetId == assetId);
+
+      // Compile the Handlebars template
+      var source = $("#modal-content-hb").html();
+      var template = Handlebars.compile(source);
+
+      // Populate the container with the compiled template and JSON data
+      var html = template(currentAsset);
+      $("#modal-content-hb-convert").html(html);
+
       $("#myModal").fadeIn();
       $(".modal-content").slideDown();
     });
@@ -43,7 +55,7 @@ function getCompartmentTable(compartments) {
                   compartment.Logistic.LogisticType
                 }</td>
                 <td class="py-2 px-4 border-b w-20 ">${
-                  compartment.Alert.HasAlert ? alertIcon : false
+                  compartment.Alert.HasAlert ? alertIcon : compartment.Alert.AlertDescription
                 }</td>
             </tr>`;
   });
@@ -64,35 +76,10 @@ function jsonToTable(data) {
       href="/3dmodel.html"
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >View 3D Model</a>
-    <button class="viewDetailsBtn bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+    <button class="viewDetailsBtn bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" id="${asset.AssetId}">
     View Details
     </button>
   </td></tr>`;
   });
   return row;
 }
-
-$(document).ready(function () {
-  // Make an API request to fetch the data
-  $.ajax({
-    url: "http://localhost:3000/api/data", // Replace with your API endpoint
-    method: "GET",
-    success: function (data) {
-      data.forEach((element) => {
-        const comparments = element.Compartments;
-        for (let i = 0; i < comparments.length; i++) {
-          $("#name").text(comparments[i].Name);
-          $("#goods").text(comparments[i].Logistic.LogisticType);
-          $("#goodsHealth").text(comparments[i].goodsHealth);
-          $("#setTemperature").find("input").val(comparments[i].SetTemprature);
-          $("#returnTemperature").text(comparments[i].ReturnTemprature);
-          $("#setHumidity").find("input").val(`${comparments[i].SetHumidity}&#176`);
-          $("#returnHumidity").text(comparments[i].ReturnHumidity);
-        }
-      });
-    },
-    error: function (error) {
-      console.log("API request failed: " + error);
-    },
-  });
-});
