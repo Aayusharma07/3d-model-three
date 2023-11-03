@@ -1,3 +1,20 @@
+$(document).ready(function () {
+  $.getJSON("http://localhost:3000/api/data", function (data) {
+    console.log("Data:", data);
+    $("#asset-table").html(jsonToTable(data));
+
+    $(".viewDetailsBtn").click(function () {
+      $("#myModal").fadeIn();
+      $(".modal-content").slideDown();
+    });
+
+    $("#closeModalBtn").click(function () {
+      $(".modal-content").slideUp();
+      $("#myModal").fadeOut();
+    });
+  });
+});
+
 function getCompartmentTable(compartments) {
   let table = `<td class="py-2 px-4 border-b">
     <table class="min-w-full border border-gray-200">
@@ -44,23 +61,13 @@ function jsonToTable(data) {
     row += `${getCompartmentTable(asset.Compartments)}`;
     row += `<td class="py-2 px-4 border-b">
     <a
-      href="/3dmodel.html#uv"
+      href="/3dmodel.html"
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >View 3D Model</a
-    >
-    <button
-      class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-    >
-      Delete
+      >View 3D Model</a>
+    <button class="viewDetailsBtn bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+    View Details
     </button>
   </td></tr>`;
   });
   return row;
 }
-
-$(document).ready(function () {
-  $.getJSON("http://localhost:3000/api/data", function (data) {
-    console.log("Data:", data);
-    $("#asset-table").html(jsonToTable(data));
-  });
-});

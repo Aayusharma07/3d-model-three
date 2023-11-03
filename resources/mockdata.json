@@ -36,7 +36,7 @@
           "AlertDescription": "IceCream is melting, decrease compartment C1 temprature to fix the issue."
         },
         "Logistic": {
-          "LogisticType": "ICE Creame",
+          "LogisticType": "ICE Cream",
           "HealthDetails": [
             {
               "State": "Normal",
@@ -103,7 +103,7 @@
         "ReturnHumidity": 29,
         "Alert": {
           "HasAlert": false,
-          "AlertDescription": "IceCream is melting, decrease compartment C1 temprature to fix the issue."
+          "AlertDescription": "Normal"
         },
         "Logistic": {
           "LogisticType": "Apple",
@@ -262,7 +262,7 @@
           "AlertDescription": "IceCream is melting, decrease compartment C1 temprature to fix the issue."
         },
         "Logistic": {
-          "LogisticType": "Fruits",
+          "LogisticType": "Medicine",
           "HealthDetails": [
             {
               "State": "Normal",
