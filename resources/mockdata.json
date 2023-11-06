@@ -27,7 +27,8 @@
     "DriverDetails": {
       "Name": "Harminson Taylor",
       "LicenceNumber": "LXXXX32546",
-      "ContactNumber": "98765XXXXX"
+      "ContactNumber": "98765XXXXX",
+      "image_path"   : "/img/driver1.png"
     },
     "Compartments": [
       {
@@ -267,7 +268,8 @@
     "DriverDetails": {
       "Name": "David Gautham",
       "LicenceNumber": "LXXXX1234",
-      "ContactNumber": "82965XXXXX"
+      "ContactNumber": "82965XXXXX",
+      "image_path"   : "img/driver2.png"
     },
     "Compartments": [
       {
