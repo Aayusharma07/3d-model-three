@@ -43,13 +43,15 @@
         "ReturnHumidity": 22,
         "Alert": {
           "HasAlert": true,
-          "AlertDescription": "Melt"
+          "AlertDescription": "Melt",
+          "Image":"/img/alert.png"
         },
         "Logistic": {
           "LogisticType": "ICE Cream",
           "HealthDetails": [
             {
               "State": "Normal",
+              "Image":"/img/icecream.png",
               "ExpectedTempratureRange": {
                 "LowerRange": "-18",
                 "UpperRange": "-25"
@@ -58,6 +60,7 @@
             },
             {
               "State": "Soft",
+              "Image":"/img/icecream.png",
               "ExpectedTempratureRange": {
                 "LowerRange": "-18",
                 "UpperRange": "0"
@@ -66,6 +69,7 @@
             },
             {
               "State": "Melt",
+              "Image":"/img/icecream.png",
               "ExpectedTempratureRange": {
                 "LowerRange": "0",
                 "UpperRange": "9999"
@@ -120,13 +124,15 @@
         "ReturnHumidity": 29,
         "Alert": {
           "HasAlert": false,
-          "AlertDescription": "Normal"
+          "AlertDescription": "Normal",
+          "Image":"/img/alert.png"
         },
         "Logistic": {
           "LogisticType": "Apple",
           "HealthDetails": [
             {
               "State": "Normal",
+              "Image":"/img/fruit.png",
               "ExpectedTempratureRange": {
                 "LowerRange": "-18",
                 "UpperRange": "-25"
@@ -135,6 +141,7 @@
             },
             {
               "State": "Rotten",
+              "Image":"/img/fruit.png",
               "ExpectedTempratureRange": {
                 "LowerRange": "-18",
                 "UpperRange": "0"
@@ -143,6 +150,7 @@
             },
             {
               "State": "Spoil",
+              "Image":"/img/fruit.png",
               "ExpectedTempratureRange": {
                 "LowerRange": "0",
                 "UpperRange": "9999"
@@ -280,13 +288,15 @@
         "ReturnHumidity": 10,
         "Alert": {
           "HasAlert": false,
-          "AlertDescription": "Normal"
+          "AlertDescription": "Normal",
+          "Image":"/img/alert.png"
         },
         "Logistic": {
           "LogisticType": "Medicine",
           "HealthDetails": [
             {
               "State": "Normal",
+              "Image":"/img/icecream.png",
               "ExpectedTempratureRange": {
                 "LowerRange": "-18",
                 "UpperRange": "-25"
@@ -295,6 +305,7 @@
             },
             {
               "State": "Spoil",
+              "Image":"/img/icecream.png",
               "ExpectedTempratureRange": {
                 "LowerRange": "-18",
                 "UpperRange": "0"

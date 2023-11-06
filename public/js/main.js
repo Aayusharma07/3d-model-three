@@ -16,7 +16,7 @@ function getTemperatureColor(temperature) {
 }
 
 function createBox(obj, scene, color){
-  const boxGeometry = new THREE.BoxGeometry(obj.width?obj.width:1.5, obj.height?obj.height:2.2, obj.size);
+  const boxGeometry = new THREE.BoxGeometry(obj.width?obj.width:1.5, obj.height?obj.height:2.6, obj.size);
   const boxMaterial = new THREE.MeshStandardMaterial({
     color: color ? color:getTemperatureColor(obj.SetTemprature),
     opacity: 1,
@@ -32,6 +32,94 @@ function createBox(obj, scene, color){
   const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
   directionalLight.position.set(1, 1, 1).normalize();
   scene.add(ambientLight, directionalLight);
+}
+
+function addImage(compartment, scene){
+  const logisticDetails = compartment.Logistic.HealthDetails.find(health => health.State === compartment.Alert.AlertDescription);
+  const texture = new THREE.TextureLoader().load(logisticDetails.Image);
+  const material = new THREE.SpriteMaterial({ map: texture });
+  const mesh = new THREE.Sprite(material);
+  mesh.scale.set(0.5, 0.5, 0.5);
+  mesh.name = compartment.Logistic.LogisticType;
+  
+  const boxCenter = new THREE.Vector3();
+  compartment.box.geometry.computeBoundingBox();
+  compartment.box.geometry.boundingBox.getCenter(boxCenter);
+  compartment.box.localToWorld(boxCenter);
+  mesh.position.copy(boxCenter);
+
+  compartment.box.add(mesh);
+  scene.add(mesh);
+}
+
+function addAlert(compartment, scene){
+  const alertTexture = new THREE.TextureLoader().load(compartment.Alert.Image);
+  const alertMaterial = new THREE.SpriteMaterial({ map: alertTexture });
+  const alertIcon = new THREE.Sprite(alertMaterial);
+  alertIcon.scale.set(0.5, 0.5, 0.5);
+  alertIcon.name="Alert"
+  
+  const boxCenter = new THREE.Vector3();
+  compartment.box.geometry.computeBoundingBox();
+  compartment.box.geometry.boundingBox.getCenter(boxCenter);
+  compartment.box.localToWorld(boxCenter);
+  alertIcon.position.copy(boxCenter);
+  alertIcon.position.y += 1.6;
+
+  scene.add(alertIcon);
+  sprite = alertIcon;
+}
+
+function addSpotLights(scene){
+    const spotLight1 = new THREE.SpotLight(0xeeeeee, 5, 100, 0.5, 0);
+    const spotLight2 = new THREE.SpotLight(0xeeeeee, 5, 100, 0.5, 0);
+    const spotLight3 = new THREE.SpotLight(0xeeeeee, 50, 100, 1, 1);
+  
+    spotLight1.position.set(25, 10, 15);
+    spotLight2.position.set(-25, 5, 15);
+    spotLight3.position.set(0, 20, -15);
+  
+    spotLight1.castShadow = false;
+    spotLight1.shadow.bias = -0.0001;
+    spotLight2.castShadow = false;
+    spotLight2.shadow.bias = -0.0001;
+    spotLight3.castShadow = true;
+    spotLight3.shadow.bias = -0.0001;
+  
+    spotLight1.name = "spotLight1"
+    spotLight2.name = "spotLight2"
+    spotLight3.name = "spotLight3"
+  
+    scene.add(spotLight1);
+    scene.add(spotLight2);
+    scene.add(spotLight3);
+}
+
+function load3DModel(scene){
+    const loader = new GLTFLoader().setPath("/3dmodel/container/");
+    loader.load("scene.gltf", (gltf) => {
+      container3DModelMesh = gltf.scene;
+      container3DModelMesh.traverse((child) => {
+        if (child.isMesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+        }
+      });
+      container3DModelMesh.position.set(1, -0.5, -4);
+      container3DModelMesh.name="3dModel";
+      scene.add(container3DModelMesh);
+    });
+}
+
+function addCarrierLogo(scene){
+    const logoTexture = new THREE.TextureLoader().load('/img/logo.png');
+    const logoMaterial = new THREE.MeshBasicMaterial({ map: logoTexture });
+    const planeGeometry = new THREE.PlaneGeometry(1.1, 0.5);
+    carrierIcon = new THREE.Mesh(planeGeometry, logoMaterial);
+    carrierIcon.position.set(1, 1.7, -4.4);
+    carrierIcon.name = "logo"
+    carrierIcon.rotation.y = Math.PI;
+    scene.add(carrierIcon);
 }
 
 function show3DModel() {
@@ -57,52 +145,27 @@ function show3DModel() {
   // Create Scenes
   const scene = new THREE.Scene();
 
-  for (const obj of compartments) {
-    createBox(obj, scene);
+  load3DModel(scene);
+  addCarrierLogo(scene);
+  for (const compartment of compartments) {
+    createBox(compartment, scene);
+    addImage(compartment, scene);
+    if(compartment.Alert.HasAlert){
+      addAlert(compartment, scene);
+    }
   }
-  
   createBox(truDetails, scene, "black");
+  addSpotLights(scene);
 
-  //create apple image
-  const appleTexture = new THREE.TextureLoader().load("/img/fruit.png");
-  const appleMaterial = new THREE.SpriteMaterial({ map: appleTexture });
-  const appleIcon = new THREE.Sprite(appleMaterial);
-  appleIcon.scale.set(0.5, 0.5, 0.5);
-  appleIcon.position.set(
-    compartments[1].position.x - 1,
-    compartments[1].position.y - 1,
-    compartments[1].position.z + 1
-  );
-  appleIcon.name = "appleIcon"
-  compartments[0].box.add(appleIcon);
+  // Set up animation
+  const animate = () => {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  };
+  animate();
 
-  // Create icecreame comparment box
-  const icecreamTexture = new THREE.TextureLoader().load("/img/icecream.png");
-  const icecreameMaterial = new THREE.SpriteMaterial({ map: icecreamTexture });
-  const icecreameIcon = new THREE.Sprite(icecreameMaterial);
-  icecreameIcon.scale.set(0.5, 0.5, 0.5);
-  icecreameIcon.position.set(
-    compartments[0].position.x,
-    compartments[0].position.y,
-    compartments[0].position.z - 1
-  );
-  compartments[0].box.add(icecreameIcon);
-  icecreameIcon.name = "IceCream"
-  scene.add(icecreameIcon);
-
-  // Create alert over comparment box
-  const alertTexture = new THREE.TextureLoader().load("/img/alert.png");
-  const alertMaterial = new THREE.SpriteMaterial({ map: alertTexture });
-  const alertIcon = new THREE.Sprite(alertMaterial);
-  alertIcon.scale.set(0.5, 0.5, 0.5);
-  alertIcon.position.set(
-    compartments[0].position.x,
-    compartments[0].position.y + 1.5,
-    compartments[0].position.z - 1
-  );
-  alertIcon.name="Alert"
-  scene.add(alertIcon);
-  sprite = alertIcon;
+  // ---------------------------------------------------------
 
   function showPopup(x, y, name) {
     popup.style.display = 'block';
@@ -114,63 +177,6 @@ function show3DModel() {
   function hidePopup() {
     popup.style.display = 'none';
   }
-
-
-  // Create carrier logo at tru
-  const logoTexture = new THREE.TextureLoader().load('/img/logo.png');
-  const logoMaterial = new THREE.SpriteMaterial({ map: logoTexture });
-  carrierIcon = new THREE.Sprite(logoMaterial);
-  carrierIcon.scale.set(1, 0.5, 0);
-  carrierIcon.position.set(1, 1.7, -4.5);
-  carrierIcon.name = "logo"
-  scene.add(carrierIcon);
-
-  // Create Spot Lights
-  const spotLight1 = new THREE.SpotLight(0xeeeeee, 5, 100, 0.5, 0);
-  const spotLight2 = new THREE.SpotLight(0xeeeeee, 5, 100, 0.5, 0);
-  const spotLight3 = new THREE.SpotLight(0xeeeeee, 50, 100, 1, 1);
-
-  spotLight1.position.set(25, 10, 15);
-  spotLight2.position.set(-25, 5, 15);
-  spotLight3.position.set(0, 20, -15);
-
-  spotLight1.castShadow = false;
-  spotLight1.shadow.bias = -0.0001;
-  spotLight2.castShadow = false;
-  spotLight2.shadow.bias = -0.0001;
-  spotLight3.castShadow = true;
-  spotLight3.shadow.bias = -0.0001;
-
-  spotLight1.name = "spotLight1"
-  spotLight2.name = "spotLight2"
-  spotLight3.name = "spotLight3"
-
-  scene.add(spotLight1);
-  scene.add(spotLight2);
-  scene.add(spotLight3);
-
-  // Load original view
-  const loader = new GLTFLoader().setPath("/3dmodel/container/");
-  loader.load("scene.gltf", (gltf) => {
-    container3DModelMesh = gltf.scene;
-    container3DModelMesh.traverse((child) => {
-      if (child.isMesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
-      }
-    });
-    container3DModelMesh.position.set(1, -0.5, -4);
-    container3DModelMesh.name="3dModel";
-    scene.add(container3DModelMesh);
-  });
-
-  // Set up animation
-  const animate = () => {
-    requestAnimationFrame(animate);
-    controls.update();
-    renderer.render(scene, camera);
-  };
-  animate();
 
   // Handle hover events
   var raycaster = new THREE.Raycaster();
