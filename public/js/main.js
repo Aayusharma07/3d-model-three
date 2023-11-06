@@ -219,6 +219,7 @@ $(document).ready(function () {
     const hashAssetId = window.location.hash.replace("#", "");
     const asset = data.find(asset=>asset.AssetId == hashAssetId)
     show3DModel(asset);
+    $("#info-popup").html(jsonToTable(compartments));
   });
 
   $("#wireframe-view-btn").click(function () {
@@ -272,25 +273,18 @@ $(document).ready(function () {
       top: 0,
       behavior: "smooth",
     });
-  });
+  });  
 
-  // var jsonData = [{ Name: "John", Age: 30, City: "New York" }];
-
-  // function jsonToTable(jsonData) {
-  //   var table =
-  //     '<table class="min-w-full bg-white border border-gray-300 shadow-md"><tbody>';
-  //   $.each(jsonData, function (index, row) {
-  //     $.each(row, function (key, value) {
-  //       table += "<tr>";
-  //       table += '<td class="py-2 px-4 border-b font-bold">' + key + "</td>";
-  //       table += '<td class="py-2 px-4 border-b">' + value + "</td>";
-  //       table += "</tr>";
-  //     });
-  //   });
-  //   table += "</tbody></table>";
-  //   return table;
-  // }
-
-  // // Display the table
-  // $("#info-popup").html(jsonToTable(jsonData));
+  function jsonToTable(compartments) {
+    var table =
+      '<table class="min-w-full bg-white border border-gray-300 shadow-md"><tbody>';
+    $.each(compartments, function (index, compartment) {
+        table += "<tr>";
+        table += '<td class="py-2 px-4 border-b">' + compartment.Logistic.LogisticType + "</td>";
+        table += `<td class="py-2 px-4 border-b font-bold ${compartment.Alert.HasAlert ? "bg-red-500" : "bg-green-400"}">${compartment.Alert.AlertDescription}</td>`;
+        table += "</tr>";
+    });
+    table += "</tbody></table>";
+    return table;
+  }
 });
