@@ -95,8 +95,8 @@ function addSpotLights(scene){
     scene.add(spotLight3);
 }
 
-function load3DModel(scene){
-    const loader = new GLTFLoader().setPath("/3dmodel/container/");
+function load3DModel(ThreeDModel, scene){
+    const loader = new GLTFLoader().setPath(ThreeDModel);
     loader.load("scene.gltf", (gltf) => {
       container3DModelMesh = gltf.scene;
       container3DModelMesh.traverse((child) => {
@@ -122,7 +122,10 @@ function addCarrierLogo(scene){
     scene.add(carrierIcon);
 }
 
-function show3DModel() {
+function show3DModel(asset) {
+  compartments = asset.Compartments;
+  truDetails = asset.TRUDetails;
+
   // Create rendered
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(800, 512);
@@ -131,7 +134,7 @@ function show3DModel() {
   document.getElementById("viewer").appendChild(renderer.domElement);
 
   // Create camera
-  const camera = new THREE.PerspectiveCamera(50, 800 / 512, 1, 1000);
+  const camera = new THREE.PerspectiveCamera(55, 800 / 512, 1, 1000);
   camera.updateProjectionMatrix();
   camera.position.set(3, 3, 8);
 
@@ -145,7 +148,7 @@ function show3DModel() {
   // Create Scenes
   const scene = new THREE.Scene();
 
-  load3DModel(scene);
+  load3DModel(asset.ThreeDModel, scene);
   addCarrierLogo(scene);
   for (const compartment of compartments) {
     createBox(compartment, scene);
@@ -213,9 +216,9 @@ function show3DModel() {
 $(document).ready(function () {
   $.getJSON("http://localhost:3000/api/data", function (data) {
     console.log("Data:", data);
-    compartments = data[0].Compartments;
-    truDetails = data[0].TRUDetails;
-    show3DModel();
+    const hashAssetId = window.location.hash.replace("#", "");
+    const asset = data.find(asset=>asset.AssetId == hashAssetId)
+    show3DModel(asset);
   });
 
   $("#wireframe-view-btn").click(function () {

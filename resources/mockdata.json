@@ -8,6 +8,7 @@
     "AlaramStatus": "Product temp is not correct",
     "ControlMode": "Continuous",
     "RearDoor": "Close",
+    "ThreeDModel":"/3dmodel/container/",
     "TRUDetails": {
       "Name": "TRU",
       "size": 0.3,
@@ -267,7 +268,19 @@
     "TRUStatus": "On",
     "AlaramStatus": "Product temp is not correct",
     "ControlMode": "StartStop",
+    "ThreeDModel":"/3dmodel/container/",
     "RearDoor": "Closed",
+    "TRUDetails": {
+      "Name": "TRU",
+      "size": 0.3,
+      "height": 1.7,
+      "width": 1,
+      "position": {
+        "x": 1,
+        "y": 1,
+        "z": -4.1
+      }
+    },
     "VehicleDetails": {
       "VehicleSerialNo": "USXXX2345",
       "CurrentSpeed": 50,
@@ -281,6 +294,12 @@
     },
     "Compartments": [
       {
+        "size": 8,
+        "position": {
+          "x": 1,
+          "y": 1,
+          "z": 0
+        },
         "Name": "C1",
         "SetTemprature": 0,
         "ReturnTemprature": -5,

@@ -73,7 +73,7 @@ function jsonToTable(data) {
     row += `${getCompartmentTable(asset.Compartments)}`;
     row += `<td class="py-2 px-4 border-b">
     <a
-      href="/3dmodel.html"
+      href="/3dmodel.html#${asset.AssetId}"
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >View 3D Model</a>
     <button class="viewDetailsBtn bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" id="${asset.AssetId}">
