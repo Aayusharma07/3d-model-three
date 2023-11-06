@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
-let container3DModelMesh, compartments;
+let container3DModelMesh, compartments, carrierIcon, truDetails, sprite;
 
 function getTemperatureColor(temperature) {
   // Normalize temperature to a value between 0 and 1
@@ -15,14 +15,31 @@ function getTemperatureColor(temperature) {
   return `rgb(${r}, ${g}, ${b})`;
 }
 
+function createBox(obj, scene, color){
+  const boxGeometry = new THREE.BoxGeometry(obj.width?obj.width:1.5, obj.height?obj.height:2.2, obj.size);
+  const boxMaterial = new THREE.MeshStandardMaterial({
+    color: color ? color:getTemperatureColor(obj.SetTemprature),
+    opacity: 1,
+    transparent: true,
+  });
+  const box = new THREE.Mesh(boxGeometry, boxMaterial);
+  box.position.set(obj.position.x, obj.position.y, obj.position.z);
+  box.visible = false;
+  box.name = obj.Name;
+  scene.add(box);
+  obj.box = box;
+  const ambientLight = new THREE.AmbientLight(0x404040);
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+  directionalLight.position.set(1, 1, 1).normalize();
+  scene.add(ambientLight, directionalLight);
+}
+
 function show3DModel() {
   // Create rendered
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(800, 512);
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setClearColor(0xeeeeee);
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   document.getElementById("viewer").appendChild(renderer.domElement);
 
   // Create camera
@@ -41,52 +58,24 @@ function show3DModel() {
   const scene = new THREE.Scene();
 
   for (const obj of compartments) {
-    const boxGeometry = new THREE.BoxGeometry(1.5, 2.2, obj.size);
-    const boxMaterial = new THREE.MeshStandardMaterial({
-      color: getTemperatureColor(obj.ReturnTemprature),
-      opacity: 1,
-      transparent: true,
-    });
-    const box = new THREE.Mesh(boxGeometry, boxMaterial);
-    box.position.set(obj.position.x, obj.position.y, obj.position.z);
-    box.visible = false;
-    scene.add(box);
-    obj.box = box;
-    // const edgesGeometry = new THREE.EdgesGeometry(box);
-    // const edgesMaterial = new THREE.LineBasicMaterial({
-    //   color: "black",
-    //   linewidth: 2,
-    // });
-    // const edges = new THREE.LineSegments(edgesGeometry, edgesMaterial);
-    // edges.position.copy(box.position);
-    // scene.add(edges);
-    const ambientLight = new THREE.AmbientLight(0x404040);
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    directionalLight.position.set(1, 1, 1).normalize();
-    scene.add(ambientLight, directionalLight);
+    createBox(obj, scene);
   }
+  
+  createBox(truDetails, scene, "black");
 
-  // // Create circle comparment box
-  // const circleGeometry = new THREE.CylinderGeometry(0.1, 0.1, 0.2, 32);
-  // const circleMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-  // const circle = new THREE.Mesh(circleGeometry, circleMaterial);
-  // circle.position.set(
-  //   compartments[1].position.x - 1,
-  //   compartments[1].position.y - 1,
-  //   compartments[1].position.z + 1
-  // );
-  // compartments[0].box.add(circle);
+  //create apple image
+  const appleTexture = new THREE.TextureLoader().load("/img/fruit.png");
+  const appleMaterial = new THREE.SpriteMaterial({ map: appleTexture });
+  const appleIcon = new THREE.Sprite(appleMaterial);
+  appleIcon.scale.set(0.5, 0.5, 0.5);
+  appleIcon.position.set(
+    compartments[1].position.x - 1,
+    compartments[1].position.y - 1,
+    compartments[1].position.z + 1
+  );
+  appleIcon.name = "appleIcon"
+  compartments[0].box.add(appleIcon);
 
-    const appleTexture = new THREE.TextureLoader().load("/img/fruit.png");
-    const appleMaterial = new THREE.SpriteMaterial({ map: appleTexture });
-    const appleIcon = new THREE.Sprite(appleMaterial);
-    appleIcon.scale.set(0.5, 0.5, 0.5);
-    appleIcon.position.set(
-      compartments[1].position.x - 1,
-      compartments[1].position.y - 1,
-      compartments[1].position.z + 1
-    );
-    compartments[0].box.add(appleIcon);
   // Create icecreame comparment box
   const icecreamTexture = new THREE.TextureLoader().load("/img/icecream.png");
   const icecreameMaterial = new THREE.SpriteMaterial({ map: icecreamTexture });
@@ -98,6 +87,7 @@ function show3DModel() {
     compartments[0].position.z - 1
   );
   compartments[0].box.add(icecreameIcon);
+  icecreameIcon.name = "IceCream"
   scene.add(icecreameIcon);
 
   // Create alert over comparment box
@@ -110,14 +100,29 @@ function show3DModel() {
     compartments[0].position.y + 1.5,
     compartments[0].position.z - 1
   );
+  alertIcon.name="Alert"
   scene.add(alertIcon);
+  sprite = alertIcon;
+
+  function showPopup(x, y, name) {
+    popup.style.display = 'block';
+    popup.style.left = x + 'px';
+    popup.style.top = y + 'px';
+    popup.innerHTML = name + ' Clicked!';
+  }
+
+  function hidePopup() {
+    popup.style.display = 'none';
+  }
+
 
   // Create carrier logo at tru
   const logoTexture = new THREE.TextureLoader().load('/img/logo.png');
   const logoMaterial = new THREE.SpriteMaterial({ map: logoTexture });
-  const carrierIcon = new THREE.Sprite(logoMaterial);
+  carrierIcon = new THREE.Sprite(logoMaterial);
   carrierIcon.scale.set(1, 0.5, 0);
   carrierIcon.position.set(1, 1.7, -4.5);
+  carrierIcon.name = "logo"
   scene.add(carrierIcon);
 
   // Create Spot Lights
@@ -136,6 +141,10 @@ function show3DModel() {
   spotLight3.castShadow = true;
   spotLight3.shadow.bias = -0.0001;
 
+  spotLight1.name = "spotLight1"
+  spotLight2.name = "spotLight2"
+  spotLight3.name = "spotLight3"
+
   scene.add(spotLight1);
   scene.add(spotLight2);
   scene.add(spotLight3);
@@ -151,6 +160,7 @@ function show3DModel() {
       }
     });
     container3DModelMesh.position.set(1, -0.5, -4);
+    container3DModelMesh.name="3dModel";
     scene.add(container3DModelMesh);
   });
 
@@ -161,46 +171,91 @@ function show3DModel() {
     renderer.render(scene, camera);
   };
   animate();
+
+  // Handle hover events
+  var raycaster = new THREE.Raycaster();
+  var mouse = new THREE.Vector2();
+  var popup = document.getElementById('popup');
+
+  function onMouseClick(event) {
+    mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
+    mouse.y = -(event.clientY /renderer.domElement.clientHeight) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+    var intersects = raycaster.intersectObjects(scene.children, true);
+    if (intersects.length > 0) {
+      const clickedObject = intersects.find(intersect => intersect.object.geometry.type != 'BufferGeometry');
+      //var clickedObject = intersects[0].object;
+      if(clickedObject.object){
+        
+        if (clickedObject.uv !== undefined) {
+          // Log the object's position (x, y)
+          console.log('Object Position (x, y):',mouse.x, clickedObject.uv.x, clickedObject.uv.y,  mouse.y);
+          showPopup(event.clientX, event.clientY, clickedObject.object.name);
+        } else {
+          console.log('Object has no position.');
+        }
+      }
+    } else {
+      hidePopup();
+    }
+  }
+
+  window.addEventListener('click', onMouseClick, false);
 }
 
 $(document).ready(function () {
   $.getJSON("http://localhost:3000/api/data", function (data) {
     console.log("Data:", data);
     compartments = data[0].Compartments;
+    truDetails = data[0].TRUDetails;
     show3DModel();
   });
 
   $("#wireframe-view-btn").click(function () {
     container3DModelMesh.visible = false;
+    carrierIcon.visible = false;
     compartments.forEach((obj) => {
       obj.box.visible = true;
       obj.box.material.wireframe = true;
     });
+    truDetails.box.visible = true;
+    truDetails.box.material.wireframe = true;
   });
 
   $("#transparent-view-btn").click(function () {
     container3DModelMesh.visible = false;
+    carrierIcon.visible = false;
     compartments.forEach((obj) => {
       obj.box.visible = true;
       obj.box.material.wireframe = false;
       obj.box.material.opacity = 0.4;
     });
+    truDetails.box.visible = true;
+    truDetails.box.material.wireframe = false;    
+    truDetails.box.material.opacity = 0.4;
   });
 
   $("#uv-view-btn").click(function () {
     container3DModelMesh.visible = false;
+    carrierIcon.visible = false;
     compartments.forEach((obj) => {
       obj.box.visible = true;
       obj.box.material.wireframe = false;
       obj.box.material.opacity = 1;
     });
+    truDetails.box.visible = true;
+    truDetails.box.material.wireframe = false;    
+    truDetails.box.material.opacity = 1;
   });
 
   $("#original-view-btn").click(function () {
     container3DModelMesh.visible = true;
+    carrierIcon.visible = true;
     compartments.forEach((obj) => {
       obj.box.visible = false;
     });
+    truDetails.box.visible = false;
   });
 
   $(".viewer-btn").click(function () {
@@ -210,23 +265,23 @@ $(document).ready(function () {
     });
   });
 
-  var jsonData = [{ Name: "John", Age: 30, City: "New York" }];
+  // var jsonData = [{ Name: "John", Age: 30, City: "New York" }];
 
-  function jsonToTable(jsonData) {
-    var table =
-      '<table class="min-w-full bg-white border border-gray-300 shadow-md"><tbody>';
-    $.each(jsonData, function (index, row) {
-      $.each(row, function (key, value) {
-        table += "<tr>";
-        table += '<td class="py-2 px-4 border-b font-bold">' + key + "</td>";
-        table += '<td class="py-2 px-4 border-b">' + value + "</td>";
-        table += "</tr>";
-      });
-    });
-    table += "</tbody></table>";
-    return table;
-  }
+  // function jsonToTable(jsonData) {
+  //   var table =
+  //     '<table class="min-w-full bg-white border border-gray-300 shadow-md"><tbody>';
+  //   $.each(jsonData, function (index, row) {
+  //     $.each(row, function (key, value) {
+  //       table += "<tr>";
+  //       table += '<td class="py-2 px-4 border-b font-bold">' + key + "</td>";
+  //       table += '<td class="py-2 px-4 border-b">' + value + "</td>";
+  //       table += "</tr>";
+  //     });
+  //   });
+  //   table += "</tbody></table>";
+  //   return table;
+  // }
 
-  // Display the table
-  $("#info-popup").html(jsonToTable(jsonData));
+  // // Display the table
+  // $("#info-popup").html(jsonToTable(jsonData));
 });

@@ -1,7 +1,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiaW8tYWNjb3VudHMiLCJhIjoiY2xqbjVweGxvMTJtNDNldXE2NHN6YWFsdSJ9.AX756oYBqrn4MNXzDV23gw'; // Replace with your Mapbox access token
 
             var startingPoints = [
-                [91.8206028, 26.16521776],   // Starting point 1 (longitude, latitude)
+                [91.8206028, 26.16521776],
                 [81.22978333, 16.64663163],
                 [79.42802566, 14.10452511],
                 [78.00177763867694, 14.604510056135306],
@@ -14,8 +14,8 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiaW8tYWNjb3VudHMiLCJhIjoiY2xqbjVweGxvMTJtNDNld
             var map = new mapboxgl.Map({
                 container: 'map',
                 style: 'mapbox://styles/mapbox/streets-v11',
-                center: startingPoints[0], // Set the initial center to the first starting point
-                zoom: 9
+                center: startingPoints[1], // Set the initial center to the first starting point
+                zoom: 3
             });
 
             // Add a marker for the destination point

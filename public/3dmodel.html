@@ -4,7 +4,23 @@
     <head lang="en">
         <meta charset="utf-8" />
         <title>Carrier | Fleet Viewer</title>
+        <style>
+            body {
+                margin: 0;
+            }
 
+            canvas {
+                display: block;
+            }
+
+            #popup {
+                position: absolute;
+                background: #fff;
+                padding: 10px;
+                border: 1px solid #ccc;
+                display: none;
+            }
+        </style>
         <script src="https://cdn.tailwindcss.com"></script>
         <script type="importmap">
             {
@@ -19,16 +35,6 @@
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
         <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
-        <script type="module" src="js/map.js"></script>
-        <style>
-            .custom-marker {
-                background-color: rgb(255, 0, 0);
-                /* Change this to the color you want */
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-            }
-        </style>
     </head>
 
     <body>
@@ -119,6 +125,8 @@
             </div>
         </main>
 
+        <script type="module" src="js/map.js"></script>
+        <div id="popup"></div>
     </body>
 
 </html>

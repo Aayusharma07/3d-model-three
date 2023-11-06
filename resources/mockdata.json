@@ -8,6 +8,17 @@
     "AlaramStatus": "Product temp is not correct",
     "ControlMode": "Continuous",
     "RearDoor": "Close",
+    "TRUDetails": {
+      "Name": "TRU",
+      "size": 0.3,
+      "height": 1.7,
+      "width": 1,
+      "position": {
+        "x": 1,
+        "y": 1,
+        "z": -3.6
+      }
+    },
     "VehicleDetails": {
       "VehicleSerialNo": "USXXX2345",
       "CurrentSpeed": 50,
@@ -102,13 +113,13 @@
           "z": 3
         },
         "Name": "C2",
-        "SetTemprature": "10",
+        "SetTemprature": "-19",
         "ReturnTemprature": -10,
         "SetHumidity": 30,
         "ReturnHumidity": 29,
         "Alert": {
-          "HasAlert": true,
-          "AlertDescription": "Spoil"
+          "HasAlert": false,
+          "AlertDescription": "Normal"
         },
         "Logistic": {
           "LogisticType": "Apple",
