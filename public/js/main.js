@@ -277,9 +277,17 @@ $(document).ready(function () {
 
   function jsonToTable(compartments) {
     var table =
-      '<table class="min-w-full bg-white border border-gray-300 shadow-md"><tbody>';
+      '<table class="min-w-full bg-white border border-gray-300 shadow-md"><thead>';
+      table += "<tr>";
+        table += '<th class="py-2 px-4 border-b">Name</th>';
+        table += '<th class="py-2 px-4 border-b">&deg;C</th>';
+        table += '<th class="py-2 px-4 border-b">Cargo</th>';
+        table += `<th class="py-2 px-4 border-b font-bold">Current State</th>`;
+        table += "</tr></thead><tbody>"; 
     $.each(compartments, function (index, compartment) {
         table += "<tr>";
+        table += '<td class="py-2 px-4 border-b">' + compartment.Name + "</td>";
+        table += '<td class="py-2 px-4 border-b">' + compartment.SetTemprature + "&deg;C</td>";
         table += '<td class="py-2 px-4 border-b">' + compartment.Logistic.LogisticType + "</td>";
         table += `<td class="py-2 px-4 border-b font-bold ${compartment.Alert.HasAlert ? "bg-red-500" : "bg-green-400"}">${compartment.Alert.AlertDescription}</td>`;
         table += "</tr>";
