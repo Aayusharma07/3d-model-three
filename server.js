@@ -47,7 +47,7 @@ app.post('/api/data', async (req, res) => {
 });
 
 function isTemperatureWithinRange(temperature, min, max) {
-  return temperature >= min && temperature <= max;
+  return parseInt(temperature) >= parseInt(min) && parseInt(temperature) <= parseInt(max);
 }
 
 // Endpoint to update the JSON content
@@ -63,7 +63,7 @@ app.post('/api/update', async (req, res) => {
         Compartment[newData.property] = newData.value;
         const newTemprature = newData.value;
         const healthDetail = Compartment.Logistic.HealthDetails.find(healthDetail =>{
-          return isTemperatureWithinRange(newTemprature, healthDetail.ExpectedTempratureRange.LowerRange, healthDetail.ExpectedTempratureRange.UpperRange);
+          return isTemperatureWithinRange(newTemprature, healthDetail.ExpectedTempratureRange.LowerRange, healthDetail.ExpectedTempratureRange.UpperRange);          
         });
         Compartment.Alert.HasAlert = healthDetail.RaiseAlert;
         Compartment.Alert.AlertDescription = healthDetail.State;

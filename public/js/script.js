@@ -44,7 +44,7 @@ function getCompartmentTable(compartments) {
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h2v2h-2v-2zm0-8h2v6h-2V9z"></path>
     </svg>
     <div class="hidden group-hover:block group-focus:block absolute z-10 w-64 p-2 mt-1 text-md text-white bg-red-600 rounded-lg">
-        ${compartment.Alert.AlertDescription}
+        ${compartment.Logistic.LogisticType + " is in " + compartment.Alert.AlertDescription + " state. Please modify the tempreture to bring to normal and avoid spoilage."}
     </div>
 </div>`;
     table += `<tr class="${
@@ -54,8 +54,8 @@ function getCompartmentTable(compartments) {
                 <td class="py-2 px-4 border-b">${
                   compartment.Logistic.LogisticType
                 }</td>
-                <td class="py-2 px-4 border-b w-20 ">${
-                  compartment.Alert.HasAlert ? alertIcon : compartment.Alert.AlertDescription
+                <td class="py-2 px-4 border-b w-40 ">${
+                  compartment.Alert.HasAlert ? compartment.Alert.AlertDescription +" "+ alertIcon : compartment.Alert.AlertDescription
                 }</td>
             </tr>`;
   });

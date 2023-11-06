@@ -8,7 +8,7 @@
     "AlaramStatus": "Product temp is not correct",
     "ControlMode": "Continuous",
     "RearDoor": "Close",
-    "ThreeDModel":"/3dmodel/container/",
+    "ThreeDModel": "/3dmodel/container/",
     "TRUDetails": {
       "Name": "TRU",
       "size": 0.3,
@@ -29,7 +29,7 @@
       "Name": "Harminson Taylor",
       "LicenceNumber": "LXXXX32546",
       "ContactNumber": "98765XXXXX",
-      "image_path"   : "/img/driver1.png"
+      "image_path": "/img/driver1.png"
     },
     "Compartments": [
       {
@@ -45,14 +45,14 @@
         "Alert": {
           "HasAlert": true,
           "AlertDescription": "Melt",
-          "Image":"/img/alert.png"
+          "Image": "/img/alert.png"
         },
         "Logistic": {
           "LogisticType": "ICE Cream",
           "HealthDetails": [
             {
               "State": "Normal",
-              "Image":"/img/icecream.png",
+              "Image": "/img/icecream.png",
               "ExpectedTempratureRange": {
                 "LowerRange": "-18",
                 "UpperRange": "-25"
@@ -61,7 +61,7 @@
             },
             {
               "State": "Soft",
-              "Image":"/img/icecream.png",
+              "Image": "/img/icecream-soft.png",
               "ExpectedTempratureRange": {
                 "LowerRange": "-18",
                 "UpperRange": "0"
@@ -70,7 +70,7 @@
             },
             {
               "State": "Melt",
-              "Image":"/img/icecream.png",
+              "Image": "/img/icecream-melt.png",
               "ExpectedTempratureRange": {
                 "LowerRange": "0",
                 "UpperRange": "9999"
@@ -106,7 +106,7 @@
             "Value": 9
           }
         ],
-        "SetTemprature": "40",
+        "SetTemprature": "1",
         "HasAlert": false,
         "AlertDescription": "Normal",
         "SetHumidity": "50"
@@ -119,39 +119,39 @@
           "z": 3
         },
         "Name": "C2",
-        "SetTemprature": "-19",
+        "SetTemprature": "-20",
         "ReturnTemprature": -10,
         "SetHumidity": 30,
         "ReturnHumidity": 29,
         "Alert": {
           "HasAlert": false,
           "AlertDescription": "Normal",
-          "Image":"/img/alert.png"
+          "Image": "/img/alert.png"
         },
         "Logistic": {
           "LogisticType": "Apple",
           "HealthDetails": [
             {
               "State": "Normal",
-              "Image":"/img/fruit.png",
+              "Image": "/img/apple.png",
               "ExpectedTempratureRange": {
-                "LowerRange": "-18",
-                "UpperRange": "-25"
+                "LowerRange": "-9999",
+                "UpperRange": "-5"
               },
               "RaiseAlert": false
             },
             {
               "State": "Rotten",
-              "Image":"/img/fruit.png",
+              "Image": "/img/apple-rotten.png",
               "ExpectedTempratureRange": {
-                "LowerRange": "-18",
+                "LowerRange": "-5",
                 "UpperRange": "0"
               },
               "RaiseAlert": true
             },
             {
               "State": "Spoil",
-              "Image":"/img/fruit.png",
+              "Image": "/img/apple-spoiled.png",
               "ExpectedTempratureRange": {
                 "LowerRange": "0",
                 "UpperRange": "9999"
@@ -268,7 +268,7 @@
     "TRUStatus": "On",
     "AlaramStatus": "Product temp is not correct",
     "ControlMode": "StartStop",
-    "ThreeDModel":"/3dmodel/container/",
+    "ThreeDModel": "/3dmodel/container/",
     "RearDoor": "Closed",
     "TRUDetails": {
       "Name": "TRU",
@@ -290,7 +290,7 @@
       "Name": "David Gautham",
       "LicenceNumber": "LXXXX1234",
       "ContactNumber": "82965XXXXX",
-      "image_path"   : "img/driver2.png"
+      "image_path": "img/driver2.png"
     },
     "Compartments": [
       {
@@ -308,14 +308,14 @@
         "Alert": {
           "HasAlert": false,
           "AlertDescription": "Normal",
-          "Image":"/img/alert.png"
+          "Image": "/img/alert.png"
         },
         "Logistic": {
           "LogisticType": "Medicine",
           "HealthDetails": [
             {
               "State": "Normal",
-              "Image":"/img/icecream.png",
+              "Image": "/img/icecream.png",
               "ExpectedTempratureRange": {
                 "LowerRange": "-18",
                 "UpperRange": "-25"
@@ -324,7 +324,7 @@
             },
             {
               "State": "Spoil",
-              "Image":"/img/icecream.png",
+              "Image": "/img/icecream.png",
               "ExpectedTempratureRange": {
                 "LowerRange": "-18",
                 "UpperRange": "0"
