@@ -29,7 +29,7 @@
       "Name": "Harminson Taylor",
       "LicenceNumber": "LXXXX32546",
       "ContactNumber": "98765XXXXX",
-      "image_path": "/img/driver1.png"
+      "Image": "/img/driver1.png"
     },
     "Compartments": [
       {
@@ -119,7 +119,7 @@
           "z": 3
         },
         "Name": "C2",
-        "SetTemprature": "-20",
+        "SetTemprature": "-10",
         "ReturnTemprature": -10,
         "SetHumidity": 30,
         "ReturnHumidity": 29,
@@ -290,7 +290,7 @@
       "Name": "David Gautham",
       "LicenceNumber": "LXXXX1234",
       "ContactNumber": "82965XXXXX",
-      "image_path": "img/driver2.png"
+      "Image": "img/driver2.png"
     },
     "Compartments": [
       {

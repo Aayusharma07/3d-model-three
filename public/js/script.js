@@ -44,7 +44,7 @@ function getCompartmentTable(compartments) {
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h2v2h-2v-2zm0-8h2v6h-2V9z"></path>
     </svg>
     <div class="hidden group-hover:block group-focus:block absolute z-10 w-64 p-2 mt-1 text-md text-white bg-red-600 rounded-lg">
-        ${compartment.Logistic.LogisticType + " is in " + compartment.Alert.AlertDescription + " state. Please modify the tempreture to bring to normal and avoid spoilage."}
+        ${compartment.Logistic.LogisticType + " would be in " + compartment.Alert.AlertDescription + " state. Please adjust the tempreture between " + compartment.Logistic.HealthDetails[0].ExpectedTempratureRange.LowerRange + ' to ' + compartment.Logistic.HealthDetails[0].ExpectedTempratureRange.UpperRange + " for normal state and avoid spoilage."}
     </div>
 </div>`;
     table += `<tr class="${

@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
-let container3DModelMesh, compartments, carrierIcon, truDetails, sprite;
+let container3DModelMesh, compartments, carrierIcon, truDetails, sprite, carrierIcon2;
 
 function getTemperatureColor(temperature) {
   // Normalize temperature to a value between 0 and 1
@@ -120,6 +120,13 @@ function addCarrierLogo(scene){
     carrierIcon.name = "logo"
     carrierIcon.rotation.y = Math.PI;
     scene.add(carrierIcon);
+
+
+    const planeGeometry2 = new THREE.PlaneGeometry(2.1, 1);
+    carrierIcon2 = new THREE.Mesh(planeGeometry2, logoMaterial);
+    carrierIcon2.position.set(3, 1, 1);
+    scene.add(carrierIcon2);
+
 }
 
 function show3DModel(asset) {
@@ -220,6 +227,11 @@ $(document).ready(function () {
     const asset = data.find(asset=>asset.AssetId == hashAssetId)
     show3DModel(asset);
     $("#info-popup").html(jsonToTable(compartments));
+
+    const source = $("#driverDetailsHB").html();
+    const template = Handlebars.compile(source);
+    const html = template(asset.DriverDetails);
+    $("#driverDetails").html(html);
   });
 
   $("#wireframe-view-btn").click(function () {

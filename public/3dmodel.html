@@ -33,6 +33,7 @@
         <script type="module" src="js/main.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
         <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
         <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
     </head>
@@ -90,16 +91,17 @@
                         <h2 class="text-2xl font-semibold py-3 px-6 bg-gray-800 text-white">
                             Driver Information
                         </h2>
-                        <div class="flex">
+                        <div class="flex" id="driverDetails">
+                        </div>
+                        <div id="driverDetailsHB" style="display: none;">
                             <div>
-                                <img src="https://placekitten.com/150/150" alt="Driver Image"
-                                    class="mb-4 rounded-full p-3" />
+                                <img src="{{Image}}" alt="Driver Image" class="mb-4 rounded-full p-3" />
                             </div>
                             <div class="p-4 pt-8">
-                                <p><strong>Name:</strong> John Doe</p>
-                                <p><strong>License Number:</strong> ABC123456</p>
+                                <p><strong>Name:</strong> {{Name}}</p>
+                                <p><strong>License Number:</strong> {{LicenceNumber}}</p>
                                 <p><strong>Vehicle:</strong> XYZ123 (Car)</p>
-                                <p><strong>Contact:</strong> 9890XXXX586 (Mobile)</p>
+                                <p><strong>Contact:</strong> {{ContactNumber}}</p>
                             </div>
                         </div>
                         <!-- Add more information as needed -->
